@@ -2,6 +2,8 @@
  * 
  */
 package elevator;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author Gary Murphy
@@ -9,46 +11,27 @@ package elevator;
  */
 public class Building {
 
-	/**
-	 * @param args
-	 */
-	
-	private static final int numOfFloors = 2; // default number of floors in building
-	private int customerList = 0;
-	
+	private static int numOfFloors = 2; // default number of floors in building
+	private static int[] customerList;
 	Elevator elev = new Elevator();
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @return the numOfFloors
-	 */
-	public int getNumOfFloors() {
-		return numOfFloors;
-	}
-
-	/**
-	 * @param numOfFloors the numOfFloors to set
-	 */
-	public void setNumOfFloors(int numOfFloors) {
+	// building constructor
+	public Building(Elevator elev, int numOfFloors, int[] customerList) {
 		this.numOfFloors = numOfFloors;
-	}
-
-	/**
-	 * @return the customerList
-	 */
-	public int getCustomerList() {
-		return customerList;
-	}
-
-	/**
-	 * @param customerList the customerList to set
-	 */
-	public void setCustomerList(int customerList) {
 		this.customerList = customerList;
+		this.elev = elev;
 	}
+
+	//start of main method
+	public static void main(String[] args) {
+		// Prompt user for input to create building
+		Scanner in = new Scanner(System.in);
+		System.out.println("Please enter the number of floors in the building: ");
+		numOfFloors = in.nextInt();
+		System.out.println("Please enter the number of customers: ");
+		customerList = new int[in.nextInt()];		
+		in.close();
+		
+	}//end of main method
 
 }

@@ -17,5 +17,13 @@ public class ElevatorTest {
 	public void test() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void testMove(){
+		if(currentFloor == )
+		
+	}
+	
+	
 
 }

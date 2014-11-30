@@ -6,18 +6,14 @@ public class Elevator {
 
 	
 	private int NUM_OF_FLOORS = 2; //The number of floors the elevator can access.
-	private ArrayList registerList; //The list of customers in the elevator
+	private ArrayList<Integer> registerList = new ArrayList<Integer>(); //The list of customers in the elevator
 	private static int currentFloor = 1;
 	
+	//start of constructor
 	public Elevator() {
 		// TODO Auto-generated constructor stub
 		this.NUM_OF_FLOORS = NUM_OF_FLOORS;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	} // end of constructor
 
 	/**
 	 * @return the currentFloor

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author G53J
+ * @author Gary Murphy
  *
  */
 public class BuildingTest {
