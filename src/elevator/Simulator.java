@@ -18,9 +18,8 @@ public class Simulator {
 
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the number of floors for the building: ");
-		Elevator elev = new Elevator(input.nextInt());
 		int numOfFloors = input.nextInt();
-				
+		Elevator elev = new Elevator(numOfFloors);
 		System.out.println("Enter the number of customers: ");
 		int[] customerList = new int[input.nextInt()];
 		input.close();
@@ -28,6 +27,7 @@ public class Simulator {
 				
 		System.out.println("The number of floors in the building is: " + bldg.getNumOfFloors());
 		System.out.println("The number of customers in the building is: " + customerList.length);
+		System.out.println("The number of floors in the elevator is: " + elev.getNUM_OF_FLOORS());
 		
 
 	}
