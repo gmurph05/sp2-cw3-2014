@@ -1,11 +1,12 @@
 package elevator;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Elevator {
 
 	
-	private int NUM_OF_FLOORS = 2; //The number of floors the elevator can access.
+	private int NUM_OF_FLOORS; //The number of floors the elevator can access.
+	
 	//private ArrayList<Integer> registerList = new ArrayList<Integer>(); //The list of customers in the elevator
 	private static int currentFloor = 1;
 	
@@ -30,5 +31,20 @@ public class Elevator {
 		Elevator.currentFloor = currentFloor;
 		return Elevator.currentFloor;
 	} // end of current floor setter method
+	
+	/**
+	 * @return the nUM_OF_FLOORS
+	 */
+	public int getNUM_OF_FLOORS() {
+		return NUM_OF_FLOORS;
+	}
+
+	/**
+	 * @param nUM_OF_FLOORS the nUM_OF_FLOORS to set
+	 */
+	public void setNUM_OF_FLOORS(int nUM_OF_FLOORS) {
+		NUM_OF_FLOORS = nUM_OF_FLOORS;
+	}
+
 
 }

@@ -2,8 +2,7 @@
  * 
  */
 package elevator;
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.ArrayList;
 
 /**
  * @author Gary Murphy
@@ -12,21 +11,21 @@ import java.util.Scanner;
 public class Building {
 
 	private static int numOfFloors = 2; // default number of floors in building
-	//Elevator elev = new Elevator(10);
-	private int NUM_OF_CUSTOMERS = 3;
-	//private int[] customerList;
+	Elevator elev;
+	
+	private int[] customerList;
 	
 	// building constructor
 	public Building(Elevator elev, int numOfFloors, int[] customerList) {
 		this.setNumOfFloors(numOfFloors);
-		//this.customerList = customerList;
-		//this.elev = elev;
+		this.setCustomerList(customerList);
+		this.setElev(elev);
 	}
 
 	/**
 	 * @return the numOfFloors
 	 */
-	public static int getNumOfFloors() {
+	public int getNumOfFloors() {
 		return numOfFloors;
 	}
 
@@ -35,6 +34,34 @@ public class Building {
 	 */
 	public void setNumOfFloors(int numOfFloors) {
 		Building.numOfFloors = numOfFloors;
+	}
+
+	/**
+	 * @return the customerList
+	 */
+	public int[] getCustomerList() {
+		return customerList;
+	}
+
+	/**
+	 * @param customerList the customerList to set
+	 */
+	public void setCustomerList(int[] customerList) {
+		this.customerList = customerList;
+	}
+	
+	/**
+	 * @return the elev
+	 */
+	public Elevator getElev() {
+		return elev;
+	}
+
+	/**
+	 * @param elev the elev to set
+	 */
+	public void setElev(Elevator elev) {
+		this.elev = elev;
 	}
 
 }
