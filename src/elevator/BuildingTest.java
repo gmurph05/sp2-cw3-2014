@@ -13,9 +13,18 @@ import org.junit.Test;
  */
 public class BuildingTest {
 
+	//Building(Elevator elev, int numOfFloors, int[] customerList)
+	
+	Elevator elev = new Elevator(13);
+	int[] customerList = new int[3];
+	Building bldg = new Building(elev, 13, customerList);
+	
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void numOfFloorsTest() {
+		int expected = 13;
+		int actual = Building.getNumOfFloors();
+		assertEquals("Wrong answer: ", expected, actual);
 	}
 
 }
