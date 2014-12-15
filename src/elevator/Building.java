@@ -11,12 +11,11 @@ package elevator;
 public class Building {
 
 	private static int numOfFloors = 2; // default number of floors in building
-	Elevator elev;
-	
-	private int[] customerList;
+	private Elevator elev;
+	private ArrayList<Customer> customerList= new ArrayList<Customer>();
 	
 	// building constructor
-	public Building(Elevator elev, int numOfFloors, int[] customerList) {
+	public Building(Elevator elev, int numOfFloors, ArrayList<Customer> customerList) {
 		this.setNumOfFloors(numOfFloors);
 		this.setCustomerList(customerList);
 		this.setElev(elev);
@@ -39,14 +38,14 @@ public class Building {
 	/**
 	 * @return the customerList
 	 */
-	public int[] getCustomerList() {
+	public ArrayList<Customer> getCustomerList() {
 		return customerList;
 	}
 
 	/**
 	 * @param customerList the customerList to set
 	 */
-	public void setCustomerList(int[] customerList) {
+	public void setCustomerList(ArrayList<Customer> customerList) {
 		this.customerList = customerList;
 	}
 	

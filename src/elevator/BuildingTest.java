@@ -14,7 +14,7 @@ import org.junit.Test;
 public class BuildingTest {
 
 	Elevator elev = new Elevator(13);
-	int[] customerList = new int[3];
+	ArrayList<Customer> customerList = new ArrayList<Customer>();
 	Building bldg = new Building(elev, 13, customerList);
 	
 	

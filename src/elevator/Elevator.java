@@ -6,15 +6,27 @@ public class Elevator {
 
 	
 	private int NUM_OF_FLOORS; //The number of floors the elevator can access.
-	
-	//private ArrayList<Integer> registerList = new ArrayList<Integer>(); //The list of customers in the elevator
+	private ArrayList<Integer> customerJoins = new ArrayList<Integer>(); //A customer goes into the elevator
+	private ArrayList<Integer> customerLeaves = new ArrayList<Integer>(); //A customer goes out of the elevator
 	private static int currentFloor = 1;
 	
 	//start of constructor
 	public Elevator(int NUM_OF_FLOORS) {
-		// TODO Auto-generated constructor stub
+		// set number of floors in instance of elevator
 		this.NUM_OF_FLOORS = NUM_OF_FLOORS;
+		this.setCustomerJoins(getCustomerJoins());
+		this.setCustomerLeaves(getCustomerLeaves());
 	} // end of constructor
+	
+	public int move(int i) {	
+		if(currentFloor > i){
+			currentFloor--;
+		}
+		if(currentFloor < i){
+			currentFloor++;
+		}
+		return currentFloor;
+	}
 
 	/**
 	 * @return the currentFloor
@@ -45,6 +57,36 @@ public class Elevator {
 	public void setNUM_OF_FLOORS(int nUM_OF_FLOORS) {
 		NUM_OF_FLOORS = nUM_OF_FLOORS;
 	}
+
+	/**
+	 * @return the customerJoins
+	 */
+	public ArrayList<Integer> getCustomerJoins() {
+		return customerJoins;
+	}
+
+	/**
+	 * @param customerJoins the customerJoins to set
+	 */
+	public void setCustomerJoins(ArrayList<Integer> customerJoins) {
+		this.customerJoins = customerJoins;
+	}
+
+	/**
+	 * @return the customerLeaves
+	 */
+	public ArrayList<Integer> getCustomerLeaves() {
+		return customerLeaves;
+	}
+
+	/**
+	 * @param customerLeaves the customerLeaves to set
+	 */
+	public void setCustomerLeaves(ArrayList<Integer> customerLeaves) {
+		this.customerLeaves = customerLeaves;
+	}
+
+
 
 
 }

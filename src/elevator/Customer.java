@@ -5,20 +5,23 @@ package elevator;
 import java.util.Random;
 
 /**
- * @author Gary Murphy (gmurph05)
+ * @author Gary Murphy + Radu Asavei
  *
  */
 public class Customer {
 	
-	private static Random startFloor = new Random();
-	private static Random destinationFloor = new Random();
-	private static int customerID = 1;
+	private Random startFloor = new Random();
+	private Random destinationFloor = new Random();
+	private static int customerID = 0;
+	private int numOfFloors;
+	private boolean finished = false;
 	
 	// Start of customer constructor
 	public Customer() {
-		Customer.customerID = getCustomerID();
-		customerID++;
-		
+		Customer.customerID = setCustomerID();
+		this.setStartFloor(numOfFloors);
+		this.setDestinationFloor(numOfFloors);
+		customerID++;	
 	} //end of customer constructor
 	
 	public int getCustomerID(){
@@ -28,29 +31,28 @@ public class Customer {
 	/**
 	 * @param customerID the customerID to set
 	 */
-	public static int setCustomerID(int customerID) {
-		Customer.customerID = customerID;
-		return Customer.customerID;
+	public static int setCustomerID() {
+		return customerID;
 	}
 
 	/**
 	 * @return the startFloor
 	 */
-	public static Random getStartFloor() {
+	public Random getStartFloor() {
 		return startFloor;
 	}
 
 	/**
-	 * @param startFloor the startFloor to set
+	 * @param i 
 	 */
-	public static void setStartFloor(Random startFloor) {
-		Customer.startFloor = startFloor;
+	public int setStartFloor(int i) {
+		return startFloor.nextInt(i);
 	}
 
 	/**
 	 * @return the destinationFloor
 	 */
-	public static Random getDestinationFloor() {
+	public Random getDestinationFloor() {
 		return destinationFloor;
 	}
 
@@ -58,9 +60,22 @@ public class Customer {
 	 * @param destinationFloor the destinationFloor to set
 	 * @return 
 	 */
-	public static Random setDestinationFloor(Random destinationFloor) {
-		Customer.destinationFloor = destinationFloor;
-		return Customer.destinationFloor;
+	public int setDestinationFloor(int i) {
+		return destinationFloor.nextInt(i);
+	}
+
+	/**
+	 * @return the finished
+	 */
+	public boolean isFinished() {
+		return finished;
+	}
+
+	/**
+	 * @param finished the finished to set
+	 */
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 	
 	

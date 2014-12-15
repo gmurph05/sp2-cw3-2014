@@ -2,11 +2,8 @@
  * 
  */
 package elevator;
-
 import static org.junit.Assert.*;
-
 import java.util.Random;
-
 import org.junit.Test;
 
 /**
@@ -20,7 +17,7 @@ public class CustomerTest {
 	
 	@Test
 	public void getCustomerIDTest() {
-		int expected = 4;
+		int expected = 1;
 		int actual = a.getCustomerID();
 		assertEquals("Wrong answer", expected, actual );			
 	}
@@ -28,24 +25,26 @@ public class CustomerTest {
 	@Test
 	public void setCustomerIDTest() {
 		int expected = 2;
-		int actual = Customer.setCustomerID(2);
+		int actual = Customer.setCustomerID();
 		assertEquals("Wrong answer", expected, actual );			
 	}
 	
 	@Test
 	public void startFloorTest(){
-		Random expected = null;
-		Random actual = null; 
+		int expected = 10;
+		int actual = a.setStartFloor(e.getNUM_OF_FLOORS()); 
 		/*Customer.getStartFloor();*/
-		assertEquals("Wrong start floor", expected, actual );
+		assertEquals("Wrong start floor", expected, actual);
 	}
 	
 	@Test
 	public void setDestinationFloorTest(){
-		Random expected = null;
-		Random random = null;
-		Random actual = Customer.setDestinationFloor(random);
-		assertEquals("Wrong destination floor", expected, actual );
+		int expected = 10;
+		//Random random = null;
+		int actual = a.setDestinationFloor(e.getNUM_OF_FLOORS());
+		System.out.printf("Destination floor is: " + actual);
+		assertEquals("Wrong destination floor", expected, actual);
+		
 		
 	}
 
