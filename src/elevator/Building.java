@@ -15,7 +15,7 @@ public class Building {
 	private ArrayList<Customer> customerList= new ArrayList<Customer>();
 	
 	// building constructor
-	public Building(Elevator elev, int numOfFloors, ArrayList<Customer> customerList) {
+	public Building(Elevator elev, int numOfFloors) {
 		this.setNumOfFloors(numOfFloors);
 		this.setCustomerList(customerList);
 		this.setElev(elev);

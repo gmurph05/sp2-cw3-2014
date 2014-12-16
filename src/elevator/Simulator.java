@@ -2,6 +2,8 @@
  * 
  */
 package elevator;
+import java.util.ArrayList;
+
 /**
  * @author Gary Murphy + Radu Asavei
  *
@@ -23,23 +25,23 @@ public class Simulator {
 		Elevator elev = new Elevator(numOfFloors);
 		System.out.println("Enter the number of customers: ");
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		for(int i = 0; i < input.nextInt(); i++){
+			customerList.add(new Customer(numOfFloors));
+		}
 		input.close();
-		Building bldg = new Building(elev, numOfFloors, customerList);
+		Building bldg = new Building(elev, numOfFloors);
 				
 		System.out.println("The number of floors in the building is: " + bldg.getNumOfFloors());
-		System.out.println("The number of customers in the building is: " + customerList.);
+		System.out.println("The number of customers in the building is: " + customerList.size());
 		System.out.println("The number of floors the elevator can access is: " + elev.getNUM_OF_FLOORS());
 		
-		//outputInfo(customerList.hashCode());
-	}
-
-	private static void outputInfo(int numOfCustomers) {
-		// ...
-		for(int i = 1; i <= numOfCustomers; i++){
-			System.out.println("Customer " + i + "\'s start floor is ");
+		for(int i = 0; i < customerList.size(); i++){
+			System.out.print("Customer ID = " + customerList.get(i).getCustomerID());
+			System.out.print("Start floor = " + customerList.get(i).getStartFloor());
+			System.out.print("Destination floor = " + customerList.get(i).getDestinationFloor());
+			System.out.println(" ");
 		}
 		
-	}// end of outputInfo method
-	
-	
+	}
+
 }
