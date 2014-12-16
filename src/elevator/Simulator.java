@@ -27,10 +27,10 @@ public class Simulator {
 		Building bldg = new Building(elev, numOfFloors, customerList);
 				
 		System.out.println("The number of floors in the building is: " + bldg.getNumOfFloors());
-		System.out.println("The number of customers in the building is: ");
+		System.out.println("The number of customers in the building is: " + customerList.);
 		System.out.println("The number of floors the elevator can access is: " + elev.getNUM_OF_FLOORS());
 		
-		outputInfo(customerList.hashCode());
+		//outputInfo(customerList.hashCode());
 	}
 
 	private static void outputInfo(int numOfCustomers) {

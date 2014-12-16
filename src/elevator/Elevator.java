@@ -18,11 +18,16 @@ public class Elevator {
 		this.setCustomerLeaves(getCustomerLeaves());
 	} // end of constructor
 	
-	public int move(int i) {	
-		if(currentFloor > i){
+	public int move(int start, int finish) {	
+		if(currentFloor == 1){
+			currentFloor++;
+		}
+		for(int i = 0; i < ){
+			if(currentFloor > start){
+		}
 			currentFloor--;
 		}
-		if(currentFloor < i){
+		if(currentFloor < start){
 			currentFloor++;
 		}
 		return currentFloor;
