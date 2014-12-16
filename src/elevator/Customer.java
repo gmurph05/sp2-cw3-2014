@@ -12,13 +12,12 @@ public class Customer {
 	
 	private Random startFloor = new Random();
 	private Random destinationFloor = new Random();
-	private static int customerID = 0;
-	private int numOfFloors;
+	public static int customerID = 0;
 	private boolean finished = false;
 	
 	// Start of customer constructor
-	public Customer() {
-		Customer.customerID = setCustomerID();
+	public Customer(int numOfFloors) {
+		this.getCustomerID();
 		this.setStartFloor(numOfFloors);
 		this.setDestinationFloor(numOfFloors);
 		customerID++;	

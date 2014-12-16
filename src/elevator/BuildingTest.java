@@ -15,12 +15,12 @@ public class BuildingTest {
 
 	Elevator elev = new Elevator(13);
 	ArrayList<Customer> customerList = new ArrayList<Customer>();
-	Building bldg = new Building(elev, 13, customerList);
+	Building bldg = new Building(elev, 13);
 	
 	
 	@Test
 	public void numOfFloorsTest() {
-		Building bldg = new Building(elev, 13, customerList);
+		Building bldg = new Building(elev, 13);
 		int expected = 13;
 		int actual = bldg.getNumOfFloors();
 		assertEquals("Wrong answer: ", expected, actual);
