@@ -33,7 +33,7 @@ public class Simulator {
 			customerList.add(new Customer(numOfFloors));
 		}
 		input.close();
-		Building bldg = new Building(elev, numOfFloors, customerList.size());
+		Building bldg = new Building(elev, numOfFloors);
 				
 		System.out.println("The number of floors in the building is: " + bldg.getNumOfFloors());
 		System.out.println("The number of customers in the building is: " + customerList.size());

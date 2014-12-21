@@ -15,9 +15,8 @@ public class Building {
 	private ArrayList<Customer> customerList= new ArrayList<Customer>();
 	
 	// building constructor
-	public Building(Elevator elev, int numOfFloors, int c) {
-		this.setNumOfFloors(numOfFloors);
-		this.setCustomerList(c);
+	public Building(Elevator elev, int numOfFloors){
+		this.setCustomerList(customerList);
 		this.setElev(elev);
 	}
 
@@ -43,10 +42,10 @@ public class Building {
 	}
 
 	/**
-	 * @param customerList the customerList to set
+	 * @param c the customerList to set
 	 */
-	public void setCustomerList(ArrayList<Customer> customerList) {
-		this.customerList = customerList;
+	public void setCustomerList(ArrayList<Customer> c) {
+		this.customerList = c;
 	}
 	
 	/**

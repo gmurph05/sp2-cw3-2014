@@ -7,7 +7,7 @@ package elevator;
 public class Elevator {
 
 	private int NUM_OF_FLOORS; //The number of floors the elevator can access.
-	private ArrayList<Integer> customerJoins = new ArrayList<Integer>(); //A customer goes into the elevator
+	private ArrayList<Customer> customerJoins = new ArrayList<Customer>(); //A customer goes into the elevator
 	private ArrayList<Integer> customerLeaves = new ArrayList<Integer>(); //A customer goes out of the elevator
 	private static int currentFloor = 1;
 	
@@ -77,7 +77,7 @@ public class Elevator {
 	/**
 	 * @return the customerJoins
 	 */
-	public ArrayList<Integer> getCustomerJoins() {
+	public ArrayList<Customer> getCustomerJoins() {
 		return customerJoins;
 	}
 

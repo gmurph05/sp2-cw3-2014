@@ -15,7 +15,7 @@ public class BuildingTest {
 
 	Elevator elev = new Elevator(13);
 	ArrayList<Customer> customerList = new ArrayList<Customer>();
-	Building bldg = new Building(elev, 13, 5);
+	Building bldg = new Building(elev, 13);
 	
 	
 	@Test

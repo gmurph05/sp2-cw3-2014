@@ -1,4 +1,6 @@
-/**
+/*
+ * @author Gary Murphy + Radu Asavei
+ *
  * 
  */
 package elevator;
@@ -6,10 +8,6 @@ import static org.junit.Assert.*;
 import java.util.Random;
 import org.junit.Test;
 
-/**
- * @author Gary Murphy + Radu Asavei
- *
- */
 public class CustomerTest {
 
 	Elevator e = new Elevator(10);
