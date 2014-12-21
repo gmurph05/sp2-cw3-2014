@@ -13,39 +13,45 @@ import org.junit.Test;
 public class CustomerTest {
 
 	Elevator e = new Elevator(10);
-	Customer a = new Customer();
+	Customer a = new Customer(13);
 	
 	@Test
-	public void getCustomerIDTest() {
-		int expected = 1;
-		int actual = a.getCustomerID();
+	public void setCustomerIDTest() {
+		//int actual = a.resetID();
+		int expected = 2;
+		int actual = a.setCustomerID();
 		assertEquals("Wrong answer", expected, actual );			
 	}
 	
 	@Test
-	public void setCustomerIDTest() {
+	//TODO the customerID variable is supposed to increment, but it is not doing that...
+	public void getCustomerIDTest() {
 		int expected = 2;
-		int actual = Customer.setCustomerID();
+		int actual = a.getCustomerID();
+		//int actual = a.resetID();
 		assertEquals("Wrong answer", expected, actual );			
 	}
 	
 	@Test
 	public void startFloorTest(){
-		int expected = 10;
+		/* Can't test for Random numbers, 
+		 * but checks errors to confirm that startFloor changes i.e. is random
+		 * and checks that startFloor does not exceed the int in Customer(int i)
+		 */
+		int expected = 7;
 		int actual = a.setStartFloor(e.getNUM_OF_FLOORS()); 
 		/*Customer.getStartFloor();*/
 		assertEquals("Wrong start floor", expected, actual);
-	}
+	} // end of startFloorTest() test method
 	
 	@Test
 	public void setDestinationFloorTest(){
-		int expected = 10;
-		//Random random = null;
+		/* Can't test for Random numbers, 
+		 * but checks errors to confirm that startFloor changes i.e. is random
+		 * and checks that startFloor does not exceed the int in Customer(int i)
+		 */
+		int expected = 7;
 		int actual = a.setDestinationFloor(e.getNUM_OF_FLOORS());
-		System.out.printf("Destination floor is: " + actual);
-		assertEquals("Wrong destination floor", expected, actual);
-		
-		
-	}
-
+		assertEquals("Wrong destination floor", expected, actual);	
+	} // end of setDestinationFloorTest() test method
 }

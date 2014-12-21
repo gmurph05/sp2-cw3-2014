@@ -2,8 +2,12 @@
  * 
  */
 package elevator;
+/*
+ *  @author Gary Murphy + Radu Asavei
+ */
 import java.util.ArrayList;
 
+import java.util.Arrays;
 /**
  * @author Gary Murphy + Radu Asavei
  *
@@ -23,13 +27,13 @@ public class Simulator {
 		System.out.println("Enter the number of floors for the building: ");
 		int numOfFloors = input.nextInt();
 		Elevator elev = new Elevator(numOfFloors);
-		System.out.println("Enter the number of customers: ");
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		System.out.println("Enter the number of customers: ");
 		for(int i = 0; i < input.nextInt(); i++){
 			customerList.add(new Customer(numOfFloors));
 		}
 		input.close();
-		Building bldg = new Building(elev, numOfFloors);
+		Building bldg = new Building(elev, numOfFloors, customerList.size());
 				
 		System.out.println("The number of floors in the building is: " + bldg.getNumOfFloors());
 		System.out.println("The number of customers in the building is: " + customerList.size());
@@ -37,8 +41,8 @@ public class Simulator {
 		
 		for(int i = 0; i < customerList.size(); i++){
 			System.out.print("Customer ID = " + customerList.get(i).getCustomerID());
-			System.out.print("Start floor = " + customerList.get(i).getStartFloor());
-			System.out.print("Destination floor = " + customerList.get(i).getDestinationFloor());
+			System.out.print("Start floor = " + (customerList.get(i).getStartFloor()));
+			System.out.printf("Destination floor = " + customerList.get(i).getDestinationFloor());
 			System.out.println(" ");
 		}
 		

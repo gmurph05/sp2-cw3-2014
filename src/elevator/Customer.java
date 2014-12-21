@@ -17,7 +17,7 @@ public class Customer {
 	
 	// Start of customer constructor
 	public Customer(int numOfFloors) {
-		this.getCustomerID();
+		this.setCustomerID();
 		this.setStartFloor(numOfFloors);
 		this.setDestinationFloor(numOfFloors);
 		customerID++;	
@@ -30,7 +30,7 @@ public class Customer {
 	/**
 	 * @param customerID the customerID to set
 	 */
-	public static int setCustomerID() {
+	public int setCustomerID() {
 		return customerID;
 	}
 
@@ -75,6 +75,10 @@ public class Customer {
 	 */
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+	}
+	
+	public int resetID(){
+		return customerID = 0;
 	}
 	
 	

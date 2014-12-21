@@ -1,10 +1,11 @@
 package elevator;
-
+/*
+ *  @author Gary Murphy + Radu Asavei
+ */
 //import java.util.ArrayList;
 
 public class Elevator {
 
-	
 	private int NUM_OF_FLOORS; //The number of floors the elevator can access.
 	private ArrayList<Integer> customerJoins = new ArrayList<Integer>(); //A customer goes into the elevator
 	private ArrayList<Integer> customerLeaves = new ArrayList<Integer>(); //A customer goes out of the elevator
@@ -18,19 +19,28 @@ public class Elevator {
 		this.setCustomerLeaves(getCustomerLeaves());
 	} // end of constructor
 	
-	public int move(int start, int finish) {	
-		if(currentFloor == 1){
-			currentFloor++;
+	public int getTopFloor(){
+		if (NUM_OF_FLOORS<13) {
+			return NUM_OF_FLOORS;
+		} else {
+			return ++NUM_OF_FLOORS;
+		}			
+	}
+	
+	public int move(int currentFloor, boolean up) {
+		if(up==true){
+			if (currentFloor==this.getTopFloor()){
+				return this.getTopFloor();
+			} else {
+				return ++currentFloor;
+				//return move(currentFloor++, true);
+			}
+		} else if (currentFloor==1){
+				return 1;
+			} else {
+				return --currentFloor;
+			//return move(currentFloor--, true);
 		}
-		for(int i = 0; i < ){
-			if(currentFloor > start){
-		}
-			currentFloor--;
-		}
-		if(currentFloor < start){
-			currentFloor++;
-		}
-		return currentFloor;
 	}
 
 	/**
@@ -60,6 +70,7 @@ public class Elevator {
 	 * @param nUM_OF_FLOORS the nUM_OF_FLOORS to set
 	 */
 	public void setNUM_OF_FLOORS(int nUM_OF_FLOORS) {
+		
 		NUM_OF_FLOORS = nUM_OF_FLOORS;
 	}
 

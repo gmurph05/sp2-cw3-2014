@@ -5,7 +5,7 @@ package elevator;
 //import java.util.ArrayList;
 
 /**
- * @author Gary Murphy
+ *  @author Gary Murphy + Radu Asavei
  *
  */
 public class Building {
@@ -15,9 +15,9 @@ public class Building {
 	private ArrayList<Customer> customerList= new ArrayList<Customer>();
 	
 	// building constructor
-	public Building(Elevator elev, int numOfFloors) {
+	public Building(Elevator elev, int numOfFloors, int c) {
 		this.setNumOfFloors(numOfFloors);
-		this.setCustomerList(customerList);
+		this.setCustomerList(c);
 		this.setElev(elev);
 	}
 
