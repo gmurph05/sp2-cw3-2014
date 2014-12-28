@@ -2,6 +2,7 @@ package elevator;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 // elevator constructor
 public class Elevator {
@@ -10,6 +11,7 @@ public class Elevator {
 	public boolean direction;
 	public ArrayList<Customer> registerList = new ArrayList<Customer>();
 	public int topFloor;
+	
 	
 
 	public Elevator(int numOfFloors) {	
@@ -107,9 +109,11 @@ public class Elevator {
 		System.out.println("Customer "+customer.getID()+" leaves the lift");
 	}
 	// method to move the elevator to the floor floorNo
-	public void move(int floorNo) {
+	public void move(int floorNo) throws InterruptedException {
 		this.currentFloor = floorNo;
 		System.out.println("Elevator moves to floor "+ this.currentFloor);
+		//Pause for 2 seconds
+		TimeUnit.SECONDS.sleep(2);
 	}
 
 }
