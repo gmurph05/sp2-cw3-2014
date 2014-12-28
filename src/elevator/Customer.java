@@ -1,3 +1,7 @@
+/**
+ * @author Radu Asavei + Gary Murphy
+ *
+ */
 package elevator;
 
 public class Customer {

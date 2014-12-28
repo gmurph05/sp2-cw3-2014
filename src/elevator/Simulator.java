@@ -1,3 +1,8 @@
+/**
+ * @author Radu Asavei + Gary Murphy
+ *
+ */
+
 package elevator;
 
 import java.util.Iterator;
@@ -79,7 +84,7 @@ public class Simulator {
 			System.out.print("in a building with "+ bld.getNumOfFloors() + " floors, starting from 1 to "+ bld.getNumOfFloors());
 		}
 		System.out.println();
-		Elevator.getCurrentFloor();
-		Elevator.getDirection();
+		//Elevator.getCurrentFloor();
+		//Elevator.getDirection();
 	}
 }

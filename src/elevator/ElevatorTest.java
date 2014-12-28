@@ -14,11 +14,23 @@ public class ElevatorTest {
 	private int destinationFloor;
 	Elevator e = new Elevator(20);
 
+	/*
+	 * @Test in progress - move method incomplete
+	 * 	
 	@Test
 	public void moveTest(){
-		int expected = 14;
-		int actual = e.move(7);
+		boolean expected = true;
+		boolean actual = e.move();
 		assertEquals("Wrong answer: ", expected, actual);
+	}*/
+	
+	@Test
+	public void getDirectionTest(){
+		boolean direction = true;
+		String expected = "Elevator going	 ^.UP.^";
+		String actual = e.getDirection(); //Warning - cannot convert from a void to a string.
+		assertEquals("Wrong answer: ", expected, actual);
+		
 	}
 
 }

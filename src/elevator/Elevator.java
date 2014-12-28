@@ -1,3 +1,7 @@
+/**
+ * @author Radu Asavei + Gary Murphy
+ *
+ */
 package elevator;
 
 import java.util.Random;
@@ -15,13 +19,13 @@ public class Elevator {
 	public Elevator(int numOfFloors) {	
 		int	topFloor = numOfFloors;
 		
-		System.out.println("Your building was equiped with an elevator.");
+		System.out.println("Your building was equipped with an elevator.");
 		
 		if(numOfFloors>12){	
 			System.out.println("This is an American building, so the 13th floor is skipped.");
 			topFloor = numOfFloors+1;
 		} 
-		System.out.print("The follwoing floors are avaiable: ");
+		System.out.print("The following floors are avaiable: ");
 		for (int i=1; i<=numOfFloors; i++){
 			if (i<13){
 				System.out.print(i+" > ");
