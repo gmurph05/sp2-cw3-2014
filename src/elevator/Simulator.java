@@ -1,11 +1,12 @@
 package elevator;
 
+import java.util.Iterator;
 /**
- * @author Radu Asavei + Gary Murphy
+ * @author Gary Murphy + Radu Asavei
  *
  */
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Simulator {
 
@@ -24,7 +25,9 @@ public class Simulator {
 		//Start simulation
 		System.out.print("The simulation will run for "+ numOfCustomers+ " customers, ");
 		initiateSimulation(building1);
+		
 		createCustomers(building1,numOfCustomers);
+		
 		int defaultRuns = runDefaultStrategy(building1);
 		int ourRuns = runOurStrategy(building1);
 		
@@ -44,14 +47,26 @@ public class Simulator {
 		return result;
 	}
 
-	private static int runDefaultStrategy(Building building1) {
+	private static int runDefaultStrategy(Building bld) {
 		// TODO Auto-generated method stub
+		Iterator<Customer> customerIterator = bld.customerList.iterator();
+		while (customerIterator.hasNext()){
+			if(bld.elevator1.getCurrentFloor()==customerIterator.next().getStartFloor()){
+				
+			}
+		}
 		int result = 0;
+		
 		return result;
 	}
 
-	private static void createCustomers(Building building1, int numOfCustomers) {
+	private static void createCustomers(Building bld, int numOfCustomers) {
 		// TODO Auto-generated method stub
+		for (int i=1; i<=numOfCustomers; i++){
+			Customer newCustomer = new Customer(i,bld);
+			bld.customerList.add(newCustomer);
+			System.out.println("New customer created: ID="+newCustomer.getID()+"; Start floor="+newCustomer.getStartFloor()+"; Destination floor="+newCustomer.getDestinationFloor());
+		}
 		
 	}
 

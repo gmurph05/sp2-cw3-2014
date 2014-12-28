@@ -1,18 +1,13 @@
 package elevator;
 
-/**
- * @author Radu Asavei + Gary Murphy
- *
- */
-
 import java.util.Random;
 import java.util.ArrayList;
 
 // elevator constructor
 public class Elevator {
 
-	private static int currentFloor;
-	private static boolean direction;
+	private int currentFloor;
+	private boolean direction;
 	public ArrayList<Customer> registerList;
 	private int topFloor;
 	
@@ -38,7 +33,7 @@ public class Elevator {
 		
 		System.out.print("The elevator will be assigned a random floor.");
 		
-		Elevator.currentFloor = setRandomFloor(numOfFloors);
+		this.currentFloor = setRandomFloor(numOfFloors);
 		
 		getCurrentFloor();
 		
@@ -58,8 +53,9 @@ public class Elevator {
 	
 				
 	// prints the current floor of the elevator
-	static void getCurrentFloor() {
-		System.out.println("The current floor is "+ currentFloor + ".");
+	int getCurrentFloor() {
+		return currentFloor;
+		//System.out.println("The current floor is "+ currentFloor + ".");
 	}
 
 	// create random floor
@@ -78,8 +74,8 @@ public class Elevator {
 	}
 	
 	//direction getter
-	public static void getDirection() {
-		if (direction==true){
+	public void getDirection() {
+		if (this.direction==true){
 			System.out.println("Elevator going	 ^.UP.^");
 		} else {
 			System.out.println("Elevator going	v.DOWN.v");
@@ -87,34 +83,33 @@ public class Elevator {
 	}
 
 	//direction setter
-	public static void setDirection(boolean direction) {
-		Elevator.direction = direction;
+	public void setDirection(boolean direction) {
+		this.direction = direction;
 	}
 
 	//method for customer joining the elevator
 	@SuppressWarnings("unused")
-	private void customerJoins(Customer customer){
-		registerList.add(customer);
+	public void customerJoins(Customer customer){
+		this.registerList.add(customer);
 	}
 	
 	//method for customer leaving the elevator
 	@SuppressWarnings("unused")
-	private void customerLeaves(Customer customer){
-		registerList.remove(customer);
+	public void customerLeaves(Customer customer){
+		this.registerList.remove(customer);
 	}
 	
-	public int move(int currentFloor) {
-		if(Elevator.direction==true){
-			if (currentFloor==this.topFloor){
-				return this.topFloor;
+	public void move() {
+		if(this.direction==true){
+			if (this.getCurrentFloor()==this.topFloor){
+				this.direction=false;
 			} else {
-				return ++currentFloor;
-				//return move(currentFloor++, true);
+				this.currentFloor++;
 			}
-		} else if (currentFloor==1){
-				return 1;
+		} else if (this.getCurrentFloor()==1){
+				this.direction=true;
 			} else {
-				return --currentFloor;
+				this.direction=false;
 			//return move(currentFloor--, true);
 		}
 	}

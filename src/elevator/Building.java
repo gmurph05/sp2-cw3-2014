@@ -1,18 +1,13 @@
 package elevator;
-
 import java.util.ArrayList;
-
 public class Building {
 	
 	private static int numOfFloors;
 	
-	@SuppressWarnings("unused")
-	private Elevator elevator1;
+	@SuppressWarnings("unused") Elevator elevator1;
+
+	public ArrayList<Customer> customerList = new ArrayList<Customer>();
 	
-	@SuppressWarnings("unused")
-	private ArrayList customerList;
-
-
 	// building constructor
 	public Building(int numOfFloors) {
 		this.setNumOfFloors(numOfFloors);
@@ -22,7 +17,7 @@ public class Building {
 		this.elevator1 = new Elevator(numOfFloors);
 		
 	// customer list for this building
-		this.customerList = new ArrayList();
+
 	}
 
 	/**
