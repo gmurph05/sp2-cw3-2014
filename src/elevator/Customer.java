@@ -1,86 +1,21 @@
-/**
- * 
- */
 package elevator;
-import java.util.Random;
 
 /**
- * @author Gary Murphy + Radu Asavei
+ * @author Radu Asavei + Gary Murphy
  *
  */
+
 public class Customer {
 	
-	private Random startFloor = new Random();
-	private Random destinationFloor = new Random();
-	public static int customerID = 0;
-	private boolean finished = false;
-	
-	// Start of customer constructor
-	public Customer(int numOfFloors) {
-		this.setCustomerID();
-		this.setStartFloor(numOfFloors);
-		this.setDestinationFloor(numOfFloors);
-		customerID++;	
-	} //end of customer constructor
-	
-	public int getCustomerID(){
-		return customerID;
-	}
+	//public static final int numOfFloors = null;
 
-	/**
-	 * @param customerID the customerID to set
-	 */
-	public int setCustomerID() {
-		return customerID;
+	// customer constructor
+	public Customer(int ID, Building bld){
+		int startFloor = Elevator.setRandomFloor(bld.getNumOfFloors());
+		int destinationFloor = Elevator.setRandomFloor(bld.getNumOfFloors());
+		@SuppressWarnings("unused")
+		boolean inElevator = false;
+		//System.out.println("Random customer "+ID+"starts on floor "+startFloor+" and goes to floor "+destinationFloor);
 	}
-
-	/**
-	 * @return the startFloor
-	 */
-	public Random getStartFloor() {
-		return startFloor;
-	}
-
-	/**
-	 * @param i 
-	 */
-	public int setStartFloor(int i) {
-		return startFloor.nextInt(i);
-	}
-
-	/**
-	 * @return the destinationFloor
-	 */
-	public Random getDestinationFloor() {
-		return destinationFloor;
-	}
-
-	/**
-	 * @param destinationFloor the destinationFloor to set
-	 * @return 
-	 */
-	public int setDestinationFloor(int i) {
-		return destinationFloor.nextInt(i);
-	}
-
-	/**
-	 * @return the finished
-	 */
-	public boolean isFinished() {
-		return finished;
-	}
-
-	/**
-	 * @param finished the finished to set
-	 */
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-	
-	public int resetID(){
-		return customerID = 0;
-	}
-	
-	
 
 }

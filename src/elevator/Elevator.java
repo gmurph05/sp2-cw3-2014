@@ -1,36 +1,112 @@
 package elevator;
-/*
- *  @author Gary Murphy + Radu Asavei
- */
-//import java.util.ArrayList;
 
+/**
+ * @author Radu Asavei + Gary Murphy
+ *
+ */
+
+import java.util.Random;
+import java.util.ArrayList;
+
+// elevator constructor
 public class Elevator {
 
-	private int NUM_OF_FLOORS; //The number of floors the elevator can access.
-	private ArrayList<Customer> customerJoins = new ArrayList<Customer>(); //A customer goes into the elevator
-	private ArrayList<Integer> customerLeaves = new ArrayList<Integer>(); //A customer goes out of the elevator
-	private static int currentFloor = 1;
+	private static int currentFloor;
+	private static boolean direction;
+	public ArrayList<Customer> registerList;
+	private int topFloor;
 	
-	//start of constructor
-	public Elevator(int NUM_OF_FLOORS) {
-		// set number of floors in instance of elevator
-		this.NUM_OF_FLOORS = NUM_OF_FLOORS;
-		this.setCustomerJoins(getCustomerJoins());
-		this.setCustomerLeaves(getCustomerLeaves());
-	} // end of constructor
-	
-	public int getTopFloor(){
-		if (NUM_OF_FLOORS<13) {
-			return NUM_OF_FLOORS;
-		} else {
-			return ++NUM_OF_FLOORS;
-		}			
+
+	public Elevator(int numOfFloors) {	
+		int	topFloor = numOfFloors;
+		
+		System.out.println("Your building was equiped with an elevator.");
+		
+		if(numOfFloors>12){	
+			System.out.println("This is an American building, so the 13th floor is skipped.");
+			topFloor = numOfFloors+1;
+		} 
+		System.out.print("The follwoing floors are avaiable: ");
+		for (int i=1; i<=numOfFloors; i++){
+			if (i<13){
+				System.out.print(i+" > ");
+			}else{
+				System.out.print(i+1+ " > ");
+			}
+		}
+		System.out.println();	
+		
+		System.out.print("The elevator will be assigned a random floor.");
+		
+		Elevator.currentFloor = setRandomFloor(numOfFloors);
+		
+		getCurrentFloor();
+		
+		// assign direction based on random floor
+		// can only be Up for 1 and Down for top floor
+		if (currentFloor==1){
+				setDirection(true);
+		} else if (currentFloor==topFloor){ 
+				setDirection(false);
+				} else {
+					Random randomDirection = new Random();
+					boolean randomDir = randomDirection.nextBoolean();
+					setDirection(randomDir);	
+				}
+		this.registerList = new ArrayList<Customer>();
 	}
 	
-	public int move(int currentFloor, boolean up) {
-		if(up==true){
-			if (currentFloor==this.getTopFloor()){
-				return this.getTopFloor();
+				
+	// prints the current floor of the elevator
+	static void getCurrentFloor() {
+		System.out.println("The current floor is "+ currentFloor + ".");
+	}
+
+	// create random floor
+	public static int setRandomFloor(int numOfFloors) {
+		Random randomFloor = new Random(); 
+		if(numOfFloors<13){	
+			int returnFloor = randomFloor.nextInt(numOfFloors);
+			return returnFloor;
+		} else {
+			int returnFloor = randomFloor.nextInt(numOfFloors)+1;
+			if(returnFloor==13){
+				returnFloor = setRandomFloor(numOfFloors);
+			}
+			return returnFloor;
+		}
+	}
+	
+	//direction getter
+	public static void getDirection() {
+		if (direction==true){
+			System.out.println("Elevator going	 ^.UP.^");
+		} else {
+			System.out.println("Elevator going	v.DOWN.v");
+		}
+	}
+
+	//direction setter
+	public static void setDirection(boolean direction) {
+		Elevator.direction = direction;
+	}
+
+	//method for customer joining the elevator
+	@SuppressWarnings("unused")
+	private void customerJoins(Customer customer){
+		registerList.add(customer);
+	}
+	
+	//method for customer leaving the elevator
+	@SuppressWarnings("unused")
+	private void customerLeaves(Customer customer){
+		registerList.remove(customer);
+	}
+	
+	public int move(int currentFloor) {
+		if(Elevator.direction==true){
+			if (currentFloor==this.topFloor){
+				return this.topFloor;
 			} else {
 				return ++currentFloor;
 				//return move(currentFloor++, true);
@@ -42,67 +118,5 @@ public class Elevator {
 			//return move(currentFloor--, true);
 		}
 	}
-
-	/**
-	 * @return the currentFloor
-	 */
-	public int getCurrentFloor() {
-		return currentFloor;
-	} // end of current floor getter method
-
-	/**
-	 * @param currentFloor - the currentFloor to set
-	 * @return 
-	 */
-	public int setCurrentFloor(int currentFloor) {
-		Elevator.currentFloor = currentFloor;
-		return Elevator.currentFloor;
-	} // end of current floor setter method
 	
-	/**
-	 * @return the nUM_OF_FLOORS
-	 */
-	public int getNUM_OF_FLOORS() {
-		return NUM_OF_FLOORS;
-	}
-
-	/**
-	 * @param nUM_OF_FLOORS the nUM_OF_FLOORS to set
-	 */
-	public void setNUM_OF_FLOORS(int nUM_OF_FLOORS) {
-		
-		NUM_OF_FLOORS = nUM_OF_FLOORS;
-	}
-
-	/**
-	 * @return the customerJoins
-	 */
-	public ArrayList<Customer> getCustomerJoins() {
-		return customerJoins;
-	}
-
-	/**
-	 * @param customerJoins the customerJoins to set
-	 */
-	public void setCustomerJoins(ArrayList<Integer> customerJoins) {
-		this.customerJoins = customerJoins;
-	}
-
-	/**
-	 * @return the customerLeaves
-	 */
-	public ArrayList<Integer> getCustomerLeaves() {
-		return customerLeaves;
-	}
-
-	/**
-	 * @param customerLeaves the customerLeaves to set
-	 */
-	public void setCustomerLeaves(ArrayList<Integer> customerLeaves) {
-		this.customerLeaves = customerLeaves;
-	}
-
-
-
-
 }
