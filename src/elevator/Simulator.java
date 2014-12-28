@@ -1,5 +1,6 @@
 package elevator;
 
+import java.util.InputMismatchException;
 import java.util.Iterator;
 /**
  * @author Gary Murphy + Radu Asavei
@@ -10,26 +11,64 @@ import java.util.Scanner;
 
 public class Simulator {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		Scanner input = new Scanner(System.in);
+		
+		int numOfFloorsValid = 0;
+		boolean validInput = false;
 		System.out.println("Enter the number of floors for the building: ");
-		int numOfFloors = input.nextInt();
+		while(!validInput){
+			try {
+				//System.out.println("Enter the number of floors for the building: ");
+				numOfFloorsValid = input.nextInt();
+				//System.out.println("numOfFloorsValid = " + numOfFloorsValid);
+				validInput = true;
+				break;
+			}catch (InputMismatchException invalideInputError) { //if an exception appears, prints message below
+			    System.err.println("Please enter an integer greater than 1! ");
+			    input.next(); // clear scanner of incorrect input
+			    continue; // continues to loop if error is found
+			}
+		};
+		int numOfFloors = numOfFloorsValid;
 		Building building1  = new Building(numOfFloors);
-		//System.out.println("Your building has: "+ numOfFloors+" floors." );
-
+		System.out.println("Your building has: "+ numOfFloors + " floors." );
+		
+		validInput = false;
+		int numOfCustomersValid = 0;
 		System.out.println("Enter the number of customers for the elevator: ");
-		int numOfCustomers = input.nextInt();
-		input.close();
+		while(!validInput){
+			try {
+				numOfCustomersValid = input.nextInt();
+				break;
+			}catch (InputMismatchException invalideInputError) { //if an exception appears, prints message below
+			    System.err.println("Please enter an integer greater than 1! ");
+			    input.next(); // clear scanner of incorrect input
+			    continue; // continues to loop if error is found
+			}
+		}
+		
+		input.close(); // Close scanner to save memory during runtime.
+		
+		int numOfCustomers = numOfCustomersValid;
 		
 		//Start simulation
 		System.out.print("The simulation will run for "+ numOfCustomers+ " customers, ");
 		initiateSimulation(building1);
-		
 		createCustomers(building1,numOfCustomers);
+		
+		
+		/*//Start simulation
+		System.out.print("The simulation will run for "+ numOfCustomers+ " customers, ");
+		initiateSimulation(building1);*/
+		
+		//createCustomers(building1,numOfCustomers);
 		
 		int defaultRuns = runDefaultStrategy(building1);
 		int ourRuns = runOurStrategy(building1);
+		
+		
 		
 		//check runs and show result
 		if (defaultRuns == ourRuns){
@@ -47,7 +86,7 @@ public class Simulator {
 		return result;
 	}
 
-	private static int runDefaultStrategy(Building bld) {
+	private static int runDefaultStrategy(Building bld) throws InterruptedException {
 		// TODO Auto-generated method stub
 		// move the elevator to the 1st floor
 		int result = 0;
