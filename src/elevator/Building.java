@@ -1,7 +1,3 @@
-/**
- * @author Radu Asavei + Gary Murphy
- *
- */
 package elevator;
 import java.util.ArrayList;
 public class Building {
@@ -38,4 +34,31 @@ public class Building {
 		Building.numOfFloors = numOfFloors;
 	}
 
+	/*
+	 * @return the customerList
+	 
+	public ArrayList<Customer> getCustomerList() {
+		return customerList;
+	}
+
+	/**
+	 * @param customerList the customerList to set
+	 
+	public void setCustomerList(ArrayList<Customer> customerList) {
+		this.customerList = customerList;
+	}
+	
+	/**
+	 * @return the elev
+	 
+	public Elevator getElev() {
+		return elev;
+	}
+
+	/**
+	 * @param elev the elev to set
+	 
+	public void setElev(Elevator elev) {
+		this.elev = elev;
+	}*/
 }

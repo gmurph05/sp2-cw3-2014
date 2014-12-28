@@ -1,8 +1,3 @@
-/**
- * @author Radu Asavei + Gary Murphy
- *
- */
-
 package elevator;
 
 import java.util.Iterator;
@@ -54,14 +49,54 @@ public class Simulator {
 
 	private static int runDefaultStrategy(Building bld) {
 		// TODO Auto-generated method stub
-		Iterator<Customer> customerIterator = bld.customerList.iterator();
-		while (customerIterator.hasNext()){
-			if(bld.elevator1.getCurrentFloor()==customerIterator.next().getStartFloor()){
-				
-			}
-		}
+		// move the elevator to the 1st floor
 		int result = 0;
+		System.out.println("Defult strategy simulation has started:");
+		bld.elevator1.move(1);
 		
+		// lift going up and picking up all customers
+		int checkFloor = bld.elevator1.currentFloor;
+		while(checkFloor<=bld.elevator1.topFloor){
+			//System.out.println("Checking floor "+checkFloor);
+			Iterator<Customer> customerIterator = bld.customerList.iterator();
+			while(customerIterator.hasNext()){
+				Customer currentCustomer = customerIterator.next();
+				//System.out.println("Checking customer "+currentCustomer.getID());
+				
+				if(currentCustomer.getStartFloor()==checkFloor){
+					if(bld.elevator1.currentFloor!=checkFloor){
+						bld.elevator1.move(checkFloor);
+						result++;
+					}
+					bld.elevator1.customerJoins(currentCustomer);
+				}
+			}
+			checkFloor++;
+		}
+		
+		//move elevator to top floor
+		bld.elevator1.move(bld.elevator1.topFloor);
+		
+		// lift coming down and dropping all customers
+		checkFloor = bld.elevator1.currentFloor;
+		while(checkFloor>=1){
+			//Iterator<Customer> liftCustomerIterator = bld.elevator1.registerList.iterator();
+			for(int i=0; i<bld.elevator1.registerList.size(); i++){
+				Customer currentLiftCustomer = bld.elevator1.registerList.get(i);
+				
+				if(currentLiftCustomer.getDestinationFloor()==checkFloor){
+					if(bld.elevator1.currentFloor!=checkFloor){
+						bld.elevator1.move(checkFloor);
+						result++;
+					}
+					bld.elevator1.customerLeaves(currentLiftCustomer);
+				}
+			}
+			checkFloor--;
+		}
+		
+		
+		System.out.println("Default strategy efficiency - Number of stops = "+result);
 		return result;
 	}
 
@@ -84,7 +119,7 @@ public class Simulator {
 			System.out.print("in a building with "+ bld.getNumOfFloors() + " floors, starting from 1 to "+ bld.getNumOfFloors());
 		}
 		System.out.println();
-		//Elevator.getCurrentFloor();
-		//Elevator.getDirection();
+		bld.elevator1.getCurrentFloor();
+		bld.elevator1.getDirection();
 	}
 }
