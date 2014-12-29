@@ -1,13 +1,13 @@
 /**
  * @author Radu Asavei + Gary Murphy
- *
+ * @since 2-November-2014
+ * @version 29-December-2014
  */
 package elevator;
 
-import static org.junit.Assert.*;
-import java.util.concurrent.TimeUnit;
+//import static org.junit.Assert.*;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class ElevatorTest {
 	
@@ -18,12 +18,11 @@ public class ElevatorTest {
 	/*
 	 * @Test in progress - move method incomplete
 	 * 	
-	 */
 	@Test
 	public void moveTest(){
-		int expected = 1;
-		int actual = e.move(1);
+		boolean expected = true;
+		boolean actual = e.move();
 		assertEquals("Wrong answer: ", expected, actual);
-	}
-	
+	}*/
+
 }

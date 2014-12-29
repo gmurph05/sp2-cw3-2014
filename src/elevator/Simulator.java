@@ -1,23 +1,49 @@
+/**
+ * @author Radu Asavei + Gary Murphy
+ * @since 2-November-2014
+ * @version 29-December-2014
+ */
+ 
 package elevator;
 
 import java.util.InputMismatchException;
 import java.util.Iterator;
-/**
- * @author Gary Murphy + Radu Asavei
- *
- */
+
 import java.util.Scanner;
 
 
 public class Simulator {
 
+	private static int ourMoves;
+	private static int defaultMoves;
+	private static int ourSteps;
+	private static int defaultSteps;
+
+	/* <pre>
+	 * Starts <code>main</code> method. 
+	 * <li>Prompts user for input to run the elevator simulator.</li>
+	 * <li>
+	 * <p>A summary will be printed once the simulation run ends
+	 * which will show the difference between the default and the new/custom strategy 
+	 * and display which one is more efficient</li>
+	 * @exception <code>InterruptedException</code> Describe any thrown exception
+	 * </pre>
+	 */
 	public static void main(String[] args) throws InterruptedException {
 
+		//Create Scanner variable to accept user input
 		Scanner input = new Scanner(System.in);
 		
+		/*
+		 * Create parameters to be used in the input validation loop below
+		 */
 		int numOfFloorsValid = 0;
 		boolean validInput = false;
 		System.out.println("Enter the number of floors for the building: ");
+		
+		/*
+		 * 
+		 */
 		while(!validInput){
 			try {
 				//System.out.println("Enter the number of floors for the building: ");
@@ -58,42 +84,165 @@ public class Simulator {
 		initiateSimulation(building1);
 		createCustomers(building1,numOfCustomers);
 		
-		
-		/*//Start simulation
-		System.out.print("The simulation will run for "+ numOfCustomers+ " customers, ");
-		initiateSimulation(building1);*/
-		
-		//createCustomers(building1,numOfCustomers);
-		
-		int defaultRuns = runDefaultStrategy(building1);
-		int ourRuns = runOurStrategy(building1);
-		
-		
+		long defaultTime = runDefaultStrategy(building1);
+		long ourTime = runOurStrategy(building1);
 		
 		//check runs and show result
-		if (defaultRuns == ourRuns){
-			System.out.println ("Both strategies have the same efficiency");
-		} else if (defaultRuns<ourRuns){
-					System.out.println ("The default strategy is more efficient");
+		System.out.println ("**************** SIMULATION RESULTS COMPARISON ************************");
+		System.out.println ("elevator stops = the number of times the elevator stopped        ");
+		System.out.println ("      The default strategy made "+defaultMoves+" elevator stops.");
+		System.out.println ("              Our strategy made "+ourMoves+" elevator stops.");
+		System.out.println ("simulated run-time = the time the elevator took to run the simulation ");
+		System.out.println ("(1 millisecond processor time = 1 second elevator time)        ");
+		System.out.println (" The simulated run-time for the default strategy was "+defaultTime+" milliseconds.");
+		System.out.println ("         The simulated run-time for our strategy was "+ourTime+" milliseconds.");
+		System.out.println ("elevator steps = the distance (in floors) the elevator travelled  ");
+		System.out.println ("      The default strategy made "+defaultSteps+" elevator steps.");
+		System.out.println ("              Our strategy made "+ourSteps+" elevator steps.");
+		
+		
+		if (defaultMoves == ourMoves){
+			System.out.println (" By elevator stops both strategies have the same efficiency   ");
+		} else if (defaultMoves<ourMoves){
+				int stops=ourMoves-defaultMoves;
+					System.out.println (" By elevtaor stops the default strategy is more efficient by " +stops+ " stops.");
 				} else {
-					System.out.println ("Our strategy is more efficient");
+					int stops=defaultMoves-ourMoves;
+						System.out.println (" By elevator stops our strategy is more efficient by "+stops+" stops.");
 				}
-	}
-
-	private static int runOurStrategy(Building building1) {
-		// TODO Auto-generated method stub
-		int result = 0;
-		return result;
-	}
-
-	private static int runDefaultStrategy(Building bld) throws InterruptedException {
-		// TODO Auto-generated method stub
+		if (defaultTime == ourTime){
+			System.out.println (" By travel time both strategies have the same efficiency   ");
+		} else if (defaultTime<ourTime){
+				long eff=ourTime-defaultTime;
+					System.out.println (" By travel time the default strategy is more efficient by " + eff + " milliseconds.");
+				} else {
+					long eff=defaultTime-ourTime;
+						System.out.println (" By travel time our strategy is more efficient by "+eff+" milliseconds.");
+				}
+		
+		if (defaultSteps == ourSteps){
+			System.out.println (" By elevator steps both strategies have the same efficiency   ");
+		} else if (defaultTime<ourTime){
+				int steps=ourSteps-defaultSteps;
+					System.out.println (" By elevator steps the default strategy is more efficient by " + steps + " steps.");
+				} else {
+					int steps=defaultSteps-ourSteps;
+						System.out.println (" By elevator steps our strategy is more efficient by "+ steps +" steps.");
+				}
+		
+		
+		
+		System.out.println ("************************ END OF SIMULATION ****************************");
+	} // end of main method
+	
+	/* <pre>	
+	 * Runs our strategy in Building Bld 
+	 * 	@return <code>ourTime</code> i.e. the time the elevator took to pick-up and drop all customers
+	 * </pre>
+	 */
+	private static long runOurStrategy(Building bld) throws InterruptedException {
+		
+		
+		/* 	move the elevator to the 1st floor in order to reset
+		* 	This move does not count towards the result, 
+		*	as both simulations need to start from the same floor, 
+		*	for a more accurate comparison 
+		*/
+		bld.elevator1.move(1); 
+		
+		StopWatch ourStrategyTime = new StopWatch();
+		// initialise result
+		ourMoves = 0;
+		ourSteps = 0;
+		ourStrategyTime.start();
+		
+		System.out.println("Our strategy simulation has started:");
+		
 		// move the elevator to the 1st floor
-		int result = 0;
-		System.out.println("Defult strategy simulation has started:");
 		bld.elevator1.move(1);
 		
-		// lift going up and picking up all customers
+		/* elevator going up and picking up all customers
+		 * regardless of which direction they are travelling
+		 */
+		int checkFloor = bld.elevator1.currentFloor;
+		while(checkFloor<=bld.elevator1.topFloor){
+			
+			Iterator<Customer> customerIterator = bld.customerList.iterator();
+			while(customerIterator.hasNext()){
+				Customer currentCustomer = customerIterator.next();
+				if(currentCustomer.getStartFloor()==checkFloor){
+					if(bld.elevator1.currentFloor!=checkFloor){
+						ourSteps = ourSteps+bld.elevator1.move(checkFloor);
+						ourMoves++;
+					}
+					bld.elevator1.customerJoins(currentCustomer);
+				}
+
+			}
+			
+			/* check if customers already in the elevator need to get off on this floor
+			 * if so, take them out of the elevator and off of the registerList
+			 */
+			for(int i=0; i<bld.elevator1.registerList.size(); i++){
+				Customer currentElevCustomer = bld.elevator1.registerList.get(i);
+				if(currentElevCustomer.getDestinationFloor()==checkFloor){
+					/*if(bld.elevator1.currentFloor!=checkFloor){
+						bld.elevator1.move(checkFloor);
+						result++;
+					}*/
+					bld.elevator1.customerLeaves(currentElevCustomer);
+				}
+			}
+			
+			checkFloor++;
+		}
+		while(checkFloor>=1){
+			
+			/*
+			 *   iterate "manually" as using an iterator while removing element throws error
+			 */
+			for(int i=0; i<bld.elevator1.registerList.size(); i++){
+				Customer currentElevCustomer = bld.elevator1.registerList.get(i);
+				
+				if(currentElevCustomer.getDestinationFloor()==checkFloor){
+					if(bld.elevator1.currentFloor!=checkFloor){
+						ourSteps = ourSteps+bld.elevator1.move(checkFloor);
+						ourMoves++;
+					}
+					bld.elevator1.customerLeaves(currentElevCustomer);
+				}
+			}
+			checkFloor--;
+		}
+		ourStrategyTime.stop();
+		long ourTime = ourStrategyTime.getElapsedTime();
+		System.out.println("*************************************************");
+		System.out.println("*      Our strategy simulation is complete      *");
+		System.out.println("*************************************************");
+		System.out.println(" ");
+		return ourTime;
+		
+	} //end of runOurStrategy method
+
+	
+	/*	method to run the default strategy in the user created building
+	 * 	@return the number of stops the elevator made to pick-up and drop all customers
+	 */
+	private static long runDefaultStrategy(Building bld) throws InterruptedException {
+		StopWatch defaultStrategyTime = new StopWatch();
+		
+		// move the elevator to the 1st floor
+		bld.elevator1.move(1);
+		
+		// initialise results
+		defaultSteps = 0;
+		defaultMoves = 0;
+		defaultStrategyTime.start();
+		
+		
+		System.out.println("Default strategy simulation has started:");
+				
+		// elevator going up and picking up all customers
 		int checkFloor = bld.elevator1.currentFloor;
 		while(checkFloor<=bld.elevator1.topFloor){
 			//System.out.println("Checking floor "+checkFloor);
@@ -104,8 +253,8 @@ public class Simulator {
 				
 				if(currentCustomer.getStartFloor()==checkFloor){
 					if(bld.elevator1.currentFloor!=checkFloor){
-						bld.elevator1.move(checkFloor);
-						result++;
+						defaultSteps = defaultSteps + bld.elevator1.move(checkFloor);
+						defaultMoves++;
 					}
 					bld.elevator1.customerJoins(currentCustomer);
 				}
@@ -113,34 +262,46 @@ public class Simulator {
 			checkFloor++;
 		}
 		
-		//move elevator to top floor
-		bld.elevator1.move(bld.elevator1.topFloor);
+		//move elevator to top floor as required by default strategy
+		defaultSteps = defaultSteps + bld.elevator1.move(bld.elevator1.topFloor);
+		defaultMoves++;
 		
-		// lift coming down and dropping all customers
+		
+		// elevator coming down and dropping off all customers in the elevator
 		checkFloor = bld.elevator1.currentFloor;
+		
 		while(checkFloor>=1){
-			//Iterator<Customer> liftCustomerIterator = bld.elevator1.registerList.iterator();
+			
+			//iterate "manually" as using an iterator while removing element throws error  
 			for(int i=0; i<bld.elevator1.registerList.size(); i++){
-				Customer currentLiftCustomer = bld.elevator1.registerList.get(i);
+				Customer currentElevCustomer = bld.elevator1.registerList.get(i);
 				
-				if(currentLiftCustomer.getDestinationFloor()==checkFloor){
+				if(currentElevCustomer.getDestinationFloor()==checkFloor){
 					if(bld.elevator1.currentFloor!=checkFloor){
-						bld.elevator1.move(checkFloor);
-						result++;
+						defaultSteps = defaultSteps + bld.elevator1.move(checkFloor);
+						defaultMoves++;
 					}
-					bld.elevator1.customerLeaves(currentLiftCustomer);
+					bld.elevator1.customerLeaves(currentElevCustomer);
 				}
 			}
 			checkFloor--;
 		}
 		
-		
-		System.out.println("Default strategy efficiency - Number of stops = "+result);
-		return result;
-	}
-
+		defaultStrategyTime.stop();
+		long defTime = defaultStrategyTime.getElapsedTime();
+		System.out.println("*************************************************");
+		System.out.println("*  The default strategy simulation is complete  *");
+		System.out.println("*************************************************");
+		System.out.println(" ");
+		return defTime;
+	} // end of runDefaultStrategy method
+	
+	
+	/* iterate through number of customers and create customers
+	 * use i as ID as this will ensure each customer has has an unique ID
+	 */
 	private static void createCustomers(Building bld, int numOfCustomers) {
-		// TODO Auto-generated method stub
+		
 		for (int i=1; i<=numOfCustomers; i++){
 			Customer newCustomer = new Customer(i,bld);
 			bld.customerList.add(newCustomer);
@@ -159,6 +320,5 @@ public class Simulator {
 		}
 		System.out.println();
 		bld.elevator1.getCurrentFloor();
-		bld.elevator1.getDirection();
-	}
+	} //end of createCustomers method
 }

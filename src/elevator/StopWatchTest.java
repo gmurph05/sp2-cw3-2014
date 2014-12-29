@@ -1,12 +1,12 @@
 /**
- * 
+ * @author Radu Asavei + Gary Murphy
+ * @since 2-November-2014
+ * @version 29-December-2014
  */
+
 package elevator;
 
-import static org.junit.Assert.*;
-
 import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +18,6 @@ public class StopWatchTest {
 
 	StopWatch timer = new StopWatch();
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void getElapsedTimeTest() throws InterruptedException {
 		timer.start();
